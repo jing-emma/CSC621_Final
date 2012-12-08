@@ -24,7 +24,7 @@
 <div class="login" id="login">
 		<fieldset style="text-align:left;">
 		   <legend><b class="title">Welcome to Crash Garage</b></legend>
-		   <form id="myform" name="loginForm" class="title">
+		   <form id="myform" name="loginForm" class="title" onsubmit="checkLogin.jsp">
 		      Username: <input type="text" name="uname"><br>
 		      Password: <input type="text" name="passwd"><br>
 			  <input type="submit" value="submit">

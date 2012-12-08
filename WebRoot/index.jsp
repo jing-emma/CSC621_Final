@@ -10,6 +10,7 @@
 	<script type="text/javascript" src="javascript/jquery-1.7.2.min.js"></script>
 	<script type="text/javascript" src="javascript/slideshow2.js"></script>
 	<script type="text/javascript" src="javascript/header.js"></script>
+	<script type="text/javascript" src="javascript/checkLogin.js"></script>
 	<title>CRASH! Garage</title>
 </head>
 <body>
