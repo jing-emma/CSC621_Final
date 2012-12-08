@@ -3,10 +3,15 @@ drop table images;
 drop table requests;
 drop table user_car;
 drop table cars;
+drop table repair;
 drop table repair_jobs;
+drop table garages;
 drop table user_address;
 drop table address;
+drop table expertise;
+drop table category;
 drop table users;
+
 
 
 create table users
@@ -17,7 +22,7 @@ create table users
     lname varchar(10),
     role varchar(10),
     primary key(username),
-    constraint role_constraint check(role in ('customer','worker'))
+    constraint role_constraint check(role in ('customer','employee'))
 );
 
 create table address(
@@ -45,19 +50,53 @@ create table user_address(
 	foreign key(address_id) references address(address_id)
 );
 
+create table garages(
+	gid int,
+	name varchar(20),
+	description varchar(300),
+	address_id int,
+	primary key(gid),
+	foreign key(address_id) references address(address_id)
+);
+drop sequence GARAGES_SEQ;
+create sequence GARAGES_SEQ
+minvalue 1
+maxvalue 999999999999999999
+start with 20
+increment by 1
+cache 20;
+
+create table category
+(	
+	cid int, 
+	name varchar(50),
+	username varchar(50),
+	primary key(cid),
+	foreign key(username) references users(username),
+	constraint category_constraint check(name in('brake', 'transmission', 'engine', 'window', 'body', 'tire', 'panel', 'battery electrical','exhaust muffler', 'Fluids, Heat Air Conditioning'))
+);
+
+create table expertise
+(
+	cid int, 
+	username varchar(50),
+	foreign key(cid) references category(cid),
+	foreign key(username) references users(username)
+);
+
 create table repair_jobs
 (
 	rid int,
 	status char(10),
 	name varchar(50),
 	description varchar(500),
-	category varchar(20),
+	cid int,
 	starttime date,
 	completetime date,
 	estimateddays int,
 	primary key (rid),
 	constraint status_constraint check(status in ('new','processing','completed')),
-	constraint category_constraint check(category in('brake', 'transmission', 'engine', 'collision', 'body'))
+	foreign key(cid) references category(cid)
 );
 drop sequence REPAIR_SEQ;
 create sequence REPAIR_SEQ
@@ -67,6 +106,13 @@ start with 20
 increment by 1
 cache 20;
 
+create table repair
+(	
+	gid int, 
+	rid int,
+	foreign key(gid) references garages(gid),
+	foreign key(rid) references repair_jobs(rid)
+);
 
 create table cars
 (
@@ -75,10 +121,10 @@ create table cars
 	model varchar(20),
 	image varchar(100),
 	vin varchar(50),
-	cartype varchar(10),
+	cartype varchar(15),
 	year date,
 	primary key(platenumber),
-	constraint cartype_constraint check(cartype in ('SUV', 'sedan', 'van', 'pickup'))
+	constraint cartype_constraint check(cartype in ('SUV', 'sedan', 'van', 'pickup', 'convertible','wagon', 'wagon', 'minivan', 'coupe'))
 );
 
 create table requests

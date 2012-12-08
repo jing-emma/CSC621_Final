@@ -13,7 +13,7 @@
 	<script type="text/javascript" src="javascript/checkLogin.js"></script>
 	<title>CRASH! Garage</title>
 </head>
-<body>
+<body onLoad="init()">
 <div class="display">
 <%@include file="header.jsp"%>
 <br>

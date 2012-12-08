@@ -9,29 +9,28 @@
 <%@page import="java.util.List"%>
 
 <% 
-    String uname = request.getParameter("username");
-    String passwd = request.getParameter("password");
-    String query = "select password from users where username = '" + uname + "'";
+    String uname = request.getParameter("uname");
+    String passwd = request.getParameter("passwd");
+    String query = "select * from users where username = '" + uname + "'";
     OracleConnector connector = new OracleConnector();
-    
     List<Map<String,String>> result = connector.getRecords(query);
     if(result.size() == 0 ){
         out.println("No such user");
-        Thread.currentThread().sleep(5000);
-        response.setStatus(response.SC_MOVED_TEMPORARILY);
-        //response.setHeader("Location", "../index.jsp");
     } else {
-       if(!passwd.equals(result.get(0).get("PASSWORD"))){
+       if(!passwd.equals(result.get(0).get("password"))){
            out.println("Incorrect password");
-           response.flushBuffer();
+          // response.flushBuffer();
            //Thread.currentThread().sleep(5000);
-           response.setStatus(response.SC_MOVED_TEMPORARILY);
+         //  response.setStatus(response.SC_MOVED_TEMPORARILY);
            //response.setHeader("Location", "../index.jsp");
-           response.sendRedirect("../index.jsp");
+          // response.sendRedirect("../index.jsp");
        } else {
-           response.setStatus(response.SC_MOVED_TEMPORARILY);
-           response.setHeader("Location", "user.jsp");
-           session.putValue("username",uname);
+          // response.setStatus(response.SC_MOVED_TEMPORARILY);
+          // response.setHeader("Location", "user.jsp");
+           session.setAttribute("username",uname);
+           session.setAttribute("role", result.get(0).get("role"));
+           session.setAttribute("name", result.get(0).get("fname")+" "+result.get(0).get("lname"));
+           out.println("OK");
        }
     }
 

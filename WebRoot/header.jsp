@@ -24,10 +24,10 @@
 <div class="login" id="login">
 		<fieldset style="text-align:left;">
 		   <legend><b class="title">Welcome to Crash Garage</b></legend>
-		   <form id="myform" name="loginForm" class="title" onsubmit="checkLogin.jsp">
-		      Username: <input type="text" name="uname"><br>
-		      Password: <input type="text" name="passwd"><br>
-			  <input type="submit" value="submit">
+		   <form id="myform" name="loginForm" class="title">
+		      Username: <input type="text" name="uname" id="uname"><br>
+		      Password: <input type="text" name="passwd" id="passwd"><br>
+			  <input type="button" value="login" onClick="login()">
 		   </form>
 		   	<div align="center">
 			   <a align="center"class="title" href="javascript:void(0);" onclick="showRegisterPage();">New User?</a>

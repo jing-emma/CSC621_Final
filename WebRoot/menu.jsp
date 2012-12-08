@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%  
+if(session.getAttribute("role").equals("customer")) { %>
 <ul>
 	<li>User Information
 		<ul>
@@ -29,5 +31,20 @@
 		</ul>
 	</li>
 </ul>
+<% } else if(session.getAttribute("role").equals("employee")){ %>
+
+
+		<ul>
+			<li><a href="myjobs.jsp" target="main">My Repair Jobs</a></li>
+			<li>All Repair Jobs
+				<ul>
+					<li><a href="createRequest.jsp" target="main">New</a></li>
+					<li><a href="jobinprocess.jsp" target="main">Processing</a></li>
+					<li><a href="jobcompleted.jsp" target="main">History</a></li>
+				</ul>
+			</li>
+		</ul>
+
+<% } %>
 </body>
 </html>
