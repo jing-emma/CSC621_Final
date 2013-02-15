@@ -9,7 +9,6 @@
 </head>
 <body>
 <%
-	session.putValue("username","guojun.blue@gmail.com");
 	String username = (String)session.getValue("username");
 	String dir = "../webapps/CrashGarage/images/upload/"+username;
 	String filename = FileUploader.upload(request.getInputStream(), request.getContentType(), request.getContentLength(),dir); 

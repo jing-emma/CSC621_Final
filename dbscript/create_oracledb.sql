@@ -93,7 +93,9 @@ create table repair_jobs
 	cid int,
 	starttime date,
 	completetime date,
+	estimatedcost float,
 	estimateddays int,
+	comments varchar(500),
 	primary key (rid),
 	constraint status_constraint check(status in ('new','processing','completed')),
 	foreign key(cid) references category(cid)
@@ -124,7 +126,7 @@ create table cars
 	cartype varchar(15),
 	year date,
 	primary key(platenumber),
-	constraint cartype_constraint check(cartype in ('SUV', 'sedan', 'van', 'pickup', 'convertible','wagon', 'wagon', 'minivan', 'coupe'))
+	constraint cartype_constraint check(cartype in ('SUV', 'sedan', 'van', 'pickup', 'convertible','wagon','minivan', 'coupe'))
 );
 
 create table requests

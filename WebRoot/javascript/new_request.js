@@ -68,18 +68,8 @@
 		var answer = confirm("Cancel this request?");
 		if(answer)
 		{
-			var tr = object.parentNode.parentNode;
-			var td;
+			var rid = object.getAttribute('rid');
 			
-			for(i=0;i<tr.childNodes.length;i++)
-			{
-				if(tr.childNodes[i].nodeName.toLowerCase()=='td')
-				{
-					td = tr.childNodes[i];
-					break;
-				}
-			}
-			var rid = td.innerHTML;
 			location.href= getRootPath()+"/server/deleteRequest.jsp?rid="+rid;
 		}
 	}
@@ -89,18 +79,7 @@
 		var answer = confirm("Confirm this request?");
 		if(answer)
 		{
-			var tr = object.parentNode.parentNode;
-			var td;
-			
-			for(i=0;i<tr.childNodes.length;i++)
-			{
-				if(tr.childNodes[i].nodeName.toLowerCase()=='td')
-				{
-					td = tr.childNodes[i];
-					break;
-				}
-			}
-			var rid = td.innerHTML;
+			var rid = object.getAttribute('rid');
 			location.href= getRootPath()+"/server/confirmRequest.jsp?rid="+rid;
 		}
 	}

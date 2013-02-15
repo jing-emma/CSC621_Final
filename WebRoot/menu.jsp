@@ -4,11 +4,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Menu</title>
+<link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
-<body>
-<%  
-if(session.getAttribute("role").equals("customer")) { %>
+<body bgcolor="8DCA66">
+<% 
+String role =  (String)session.getAttribute("role");
+if(role == null) { %>
+	<script type="text/javascript">
+		alert("Your session expired. Please login again!");
+		<%out.print("<script type=text/javascript>window.parent.location.href='index.jsp'</script>"); %>
+	</script>
+
+<% } else {
+		if(role.equals("customer")){ %>
 <ul>
 	<li>User Information
 		<ul>
@@ -35,16 +44,17 @@ if(session.getAttribute("role").equals("customer")) { %>
 
 
 		<ul>
-			<li><a href="myjobs.jsp" target="main">My Repair Jobs</a></li>
+			<li><a href="employee/myJobs.jsp" target="main">My Repair Jobs</a></li>
 			<li>All Repair Jobs
 				<ul>
-					<li><a href="createRequest.jsp" target="main">New</a></li>
-					<li><a href="jobinprocess.jsp" target="main">Processing</a></li>
-					<li><a href="jobcompleted.jsp" target="main">History</a></li>
+					<li><a href="employee/newJobs.jsp" target="main">New</a></li>
+					<li><a href="employee/ongoingJobs.jsp" target="main">Processing</a></li>
+					<li><a href="employee/completedJobs.jsp" target="main">History</a></li>
 				</ul>
 			</li>
 		</ul>
 
-<% } %>
+<%  } 
+		} %>
 </body>
 </html>

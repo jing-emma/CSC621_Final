@@ -12,7 +12,7 @@
 	String rid = request.getParameter("rid");
 	OracleConnector con = new OracleConnector();
 	String sql = "update repair_jobs "
-				+"set status = 'processing' "
+				+"set status = 'processing', starttime=sysdate "
 				+"where rid="+rid;
 	con.insertUpdateRecord(sql);
 	response.sendRedirect("../createRequest.jsp");

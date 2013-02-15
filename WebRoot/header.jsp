@@ -26,7 +26,7 @@
 		   <legend><b class="title">Welcome to Crash Garage</b></legend>
 		   <form id="myform" name="loginForm" class="title">
 		      Username: <input type="text" name="uname" id="uname"><br>
-		      Password: <input type="text" name="passwd" id="passwd"><br>
+		      Password: <input type="password" name="passwd" id="passwd"><br>
 			  <input type="button" value="login" onClick="login()">
 		   </form>
 		   	<div align="center">

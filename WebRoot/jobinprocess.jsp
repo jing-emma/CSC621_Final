@@ -1,5 +1,5 @@
 <%-- 
-    Document   : repairing.jsp
+    Document   : jobinprocess.jsp
     Created on : Nov 21, 2012, 9:41:50 PM
     Author     : admin
 --%>
@@ -17,26 +17,32 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>repair jobs in processing</title>
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<link rel="stylesheet" type="text/css" href="css/repairJobs.css">
+
 </head>
 <body>
-	<form action="upload.jsp" method="post" ENCTYPE='multipart/form-data'>
-		<input type="file" name="file" /> <input type="submit" />
-	</form>
+<div>
 	<%
-		//to do add username from session in query
+		String username = (String)session.getAttribute("username");
 		String query = "select platenumber, rid, name, description, to_char(starttime, 'YYYY-MM-DD') starttime,"
-				+ "estimateddays, fname, lname from repair_jobs natural join cars natural join requests left join users on (users.username=requests.personincharge) where status='processing'";
+				+ "estimateddays, fname, lname from repair_jobs natural join cars natural join requests "
+				+"left join users on (users.username=requests.personincharge) where status='processing' and requests.username='"
+				+ username + "'";
 		OracleConnector connector = new OracleConnector();
 		List<Map<String, String>> result = connector.getRecords(query);
 		if (result.size() == 0) {
 			out.println("No reparing job in process");
 		} else {
 	%>
-	<table width="80%">
+	<br/>
+	<h1 align="center">Repair jobs in processing</h1>
+	<hr>
+	<br/>
+	<table align="center" width="95%">
+		
 		<tr>
-			<td colspan="5">Repair jobs in processing</td>
-		</tr>
-		<tr>
+			<th>Job ID</th>
 			<th>Car</th>
 			<th>Problem</th>
 			<th>Status</th>
@@ -46,6 +52,7 @@
 		</tr>
 		<%
 			Iterator<Map<String, String>> iter = result.iterator();
+			boolean background = true;
 				while (iter.hasNext()) {
 					Map<String, String> tuple = iter.next();
 					//Set<Map.Entry<String, String>> sets = tuple.entrySet();
@@ -59,36 +66,31 @@
 					Date estimatedComplete = null;
 
 					long estimatedDays = Integer.parseInt(tuple
-							.get("estimateddays"));
-					System.out.println(estimatedDays);
+							.get("estimateddays"));				
 					if (estimatedDays != 0) {
 						Date start = java.sql.Date.valueOf(startTime);
-						System.out.println("Start" + start.getTime());
 						long end = start.getTime()
 								+ (estimatedDays * 24 * 60 * 60 * 1000);
-						System.out.println("end  " + end);
 						estimatedComplete = new Date(end);
 					}
 					String fname = tuple.get("fname");
 					String lname = tuple.get("lname");
 		%>
-		<tr>
-			<td>
-				<%
-					out.print(plateNumber);
-				%>
-			</td>
-			<td>
-				<%
-					out.print(description);
-				%>
-			</td>
+		<% if(background) {
+			background = false; %>
+			<tr align="center" style="background-color:#E9E9E9">
+		
+		<% }else { 
+			background = true; %>
+			<tr align="center">
+		<% } %>
+			<td><a href="requestDetail.jsp?rid=<%= rid %>"><%= rid%></a></td>
+			<td><%= plateNumber%></td>
+			<td><%= description%></td>
+		
 			<td>Processing</td>
-			<td>
-				<%
-					out.print(startTime);
-				%>
-			</td>
+			<td><%= startTime%></td>
+			
 			<td>
 				<%
 					if (estimatedComplete != null) {
@@ -115,5 +117,6 @@
 	<%
 		}
 	%>
+	</div>
 </body>
 </html>

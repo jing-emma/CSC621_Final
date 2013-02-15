@@ -28,6 +28,7 @@
 	String query = "INSERT INTO cars VALUES('"+plate+"','"+make+"','"+model+"','"+image+"','"+VIN+"','"+category+"',"+"TO_DATE('"+purchasedate+"','YYYY'))";
 	String query1 = "INSERT INTO user_car VALUES('"+user+"','"+plate+"')";
 	System.out.println(query);
+	System.out.println(query1);
 	OracleConnector con = new OracleConnector();
 	con.insertUpdateRecord(query);
 	con.insertUpdateRecord(query1);

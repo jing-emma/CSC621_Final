@@ -6,6 +6,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="css/address.css"></link>
 <script type="text/javascript" src="javascript/address.js"></script>
 </head>
 <body>
@@ -16,7 +17,6 @@
 	String city = "";
 	String country = "";
 	String phone = "";
-	session.putValue("username","jz570129@sju.edu");
 	String username = (String)session.getValue("username");
 	String queryString = request.getQueryString();
 	OracleConnector con = new OracleConnector();
@@ -83,42 +83,47 @@
 		}
 	}   
 %>
-<div>
-	<table>
-		<tr>
+<br/>
+<h2 align="center">Address Information</h2>
+<br/>
+<hr>
+<br/>
+<div id="address_content">
+	<table id="address_table" cellpadding="5">
+		<tr class="gray_row">
 			<td>Address Line1:</td>
-			<td><input id="address1" type="text" width="300" value="<%= address1 %>" disabled="disabled" /></td>
+			<td><input id="address1" type="text" style="height:20px;width:220px" value="<%= address1 %>" disabled="disabled" /></td>
 		</tr>
 		<tr>
-			<td>Address Line2:</td>
-			<td><input id="address2" type="text" width="300" value="<%= address2 %>" disabled="disabled" /></td>
+			<td class="address_left">Address Line2:</td>
+			<td><input id="address2" type="text" style="height:20px;width:220px" value="<%= address2 %>" disabled="disabled" /></td>
+		</tr>
+		<tr class="gray_row">
+			<td class="address_left">Town/City:</td>
+			<td><input id="city" type="text" style="height:20px;width:220px" value="<%= city %>" disabled="disabled" /></td>
 		</tr>
 		<tr>
-			<td>Town/City:</td>
-			<td><input id="city" type="text" width="150" value="<%= city %>" disabled="disabled" /></td>
+			<td class="address_left">Country:</td>
+			<td><input id="country" type="text" style="height:20px;width:220px" value="<%= country %>" disabled="disabled" /></td>
 		</tr>
-		<tr>
-			<td>Country</td>
-			<td><input id="country" type="text" width="100" value="<%= country %>" disabled="disabled" /></td>
-		</tr>
-		<tr>
-			<td>Phone Number:</td>
-			<td><input id="phone" type="text" width="100" value="<%= phone %>" disabled="disabled"/></td>
+		<tr class="gray_row">
+			<td class="address_left">Phone Number:</td>
+			<td><input id="phone" type="text" style="height:20px;width:220px" value="<%= phone %>" disabled="disabled"/></td>
 		</tr>
 	</table>
 </div>
 <div id="update">
-	<table>
+	<table id="upate_table">
 		<tr>
-			<td><input type="button" value="Update" onClick="update()" /></td>
+			<td><input type="button" value="Update" class="update_button"  onClick="update()" /></td>
 		</tr>
 	</table>
 </div>
 <div id="confirm" style="display:none;">
-	<table>
+	<table id="confirm_table">
 		<tr>
-			<td><input type="button" value="Confirm" onClick="addressChange(true)"/></td>
-			<td><input type="button" value="Cancel" onClick="addressChange(false)" /></td>
+			<td><input type="button" value="Confirm" class="confirm_button"  onClick="addressChange(true)"/></td>
+			<td><input type="button" value="Cancel" class="cancel_button" onClick="addressChange(false)" /></td>
 		</tr>
 	</table>
 </div>

@@ -16,9 +16,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>repair jobs in processing</title>
+<title>report</title>
+<link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
+<div style="text-align: center">
 <!-- Customer Info -->
 	<%
 		String repairId = request.getParameter("id");
@@ -88,7 +90,7 @@
 	%>
 	<p>
 	<h3>Vehicle</h3>
-	<table>
+	<table align="center">
 		<tr>
 			<td>Plate Number:</td>
 			<td>
@@ -131,18 +133,24 @@
 	
 	<!-- Repair job -->
 	<%
-		query ="select to_char(starttime, 'YYYY-MM-DD') starttime, to_char(completetime, 'YYYY-MM-DD') completetime from repair_jobs where rid="+repairId;
+		query ="select to_char(starttime, 'YYYY-MM-DD') starttime, to_char(completetime, 'YYYY-MM-DD') completetime, "
+			+"fname, lname from repair_jobs natural join requests join users on (requests.personincharge = users.username) where rid="+repairId;
+		System.out.println(query);
 		connector = new OracleConnector();
 		result = connector.getRecords(query);
 		if (result.size() > 0) {
 			tuple = result.get(0);
 			String startTime = tuple.get("starttime");
-			String completeTime = tuple.get("completetime"); %>
+			String completeTime = tuple.get("completetime");
+			String personincharge = tuple.get("fname") + " " +tuple.get("lname"); %>
 			<p>
 			<h3>Repair job:</h3>
+			<div style="text-align: center">
 			Job ID: <% out.println(repairId); %><br/>
 			Start time: <% out.println(startTime); %><br/>
 			Complete time:  <% out.println(completeTime); %><br/>
+			Person in charge: <%=personincharge %>
+			</div>
 			</p>
 			<hr>
 			<%} %>
@@ -156,7 +164,7 @@
 	%>
 	<p>
 	<h3>Cost:</h3>
-	<table>
+	<table align="center">
 		<tr>
 			<th>Item</th>
 			<th>Description</th>
@@ -250,5 +258,6 @@
 	<%
 		}
 	%>
+	</div>
 </body>
 </html>

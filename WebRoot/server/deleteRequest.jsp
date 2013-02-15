@@ -15,13 +15,17 @@
 				+"where rid="+rid;
 	con.insertUpdateRecord(sql);
 	
-	sql = "delete from repair_jobs "
-		+"where rid="+rid;
-	con.insertUpdateRecord(sql);
-	
 	sql = "delete from images "
 		+ "where rid="+rid;
+	con = new OracleConnector();
 	con.insertUpdateRecord(sql);
+	
+	sql = "delete from repair_jobs "
+		+"where rid="+rid;
+	con = new OracleConnector();
+	con.insertUpdateRecord(sql);
+	
+	
 	
 	response.sendRedirect("../createRequest.jsp");
 %>

@@ -2,28 +2,16 @@
   <div id="slideshow-scroller">
     <div id="slideshow-holder">
       <div class="slideshow-content">
-        <img src="car-images/audi.jpg" />
+        <img src="car-images/image_1.jpg" />
       </div>
       <div class="slideshow-content">
-        <img src="car-images/cayenne.jpg" />
+        <img src="car-images/image_2.jpg" />
       </div>
       <div class="slideshow-content">
-        <img src="car-images/ferrari.jpg" />
+        <img src="car-images/image_3.jpg" />
       </div>
 	  <div class="slideshow-content">
-        <img src="car-images/mclaren.jpg" />
-      </div>
-	  <div class="slideshow-content">
-        <img src="car-images/mercedez.jpg" />
-      </div>
-	  <div class="slideshow-content">
-        <img src="car-images/mini.jpg" />
-      </div>
-	  <div class="slideshow-content">
-        <img src="car-images/r8.jpg" />
-      </div>
-	  <div class="slideshow-content">
-        <img src="car-images/truck.jpg" />
+        <img src="car-images/image_4.jpg" />
       </div>
     </div>
   </div>

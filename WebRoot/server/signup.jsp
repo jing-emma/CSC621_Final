@@ -22,8 +22,12 @@
        out.println(2);
     } else {
        query = "insert into users values('"+uname+"','"+passwd+"','"+fname+"','"+lname+"')";
-       if(connector.insertUpdateRecord(query))
+       if(connector.insertUpdateRecord(query)){
+       	   session.setAttribute("username",uname);
+           session.setAttribute("role", result.get(0).get("role"));
+           session.setAttribute("name", result.get(0).get("fname")+" "+result.get(0).get("lname"));
            out.println(0);
+       }
        else
            out.println(1);
     }

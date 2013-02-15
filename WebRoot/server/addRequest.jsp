@@ -5,7 +5,6 @@
 <%@ page import="java.util.Map"%>
 <%@ page import="json.JsonUtil" %>
 <%
-	session.putValue("username","guojun.blue@gmail.com");
 	String username = (String)session.getValue("username");
 		
 	String json_string = request.getParameter("new");
@@ -32,15 +31,19 @@
 											",'"+name+"'"+	//name
 											",'"+description+"'"+	 //description
 											",'"+category+"'"+		//category
-											",'','','')";
+											",null,null,0,0,null)";
 											
 	System.out.println("insert sql " + sql);									
 	con.insertUpdateRecord(sql);
 	
+	String query = "select username from category where cid='"+category+"'";
+	System.out.println(query);
+	List<Map<String, String>> lResult = con.getRecords(query);
+	String leader = lResult.get(0).get("username");
 	sql = "insert into requests values("+repair_id+
 										",'"+username+"'"+
 										",'"+plate+"'"+
-										",'')";
+										",'"+leader+"')";
 	con.insertUpdateRecord(sql);
 	String img_path = (String)session.getValue("img");
 	
